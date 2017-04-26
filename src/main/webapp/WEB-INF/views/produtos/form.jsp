@@ -11,21 +11,21 @@
 	<form action="/casadocodigo/produtos" method="post">
 		<div>
 			<label>Titulo</label>
-			<input type="text" name="titulo">
+			<input type="text" name="title">
 		</div>
 		<div>
 			<label>Descrição</label>
-			<textarea rows="10" cols="20" name="descricao"></textarea>	
+			<textarea rows="10" cols="20" name="description"></textarea>	
 		</div>
 		<div>
 			<label>Páginas</label>	
-			<input type="text" name="paginas">
+			<input type="text" name="pages">
 		</div>
-		<c:forEach items="${tipos}" var="tipoPreco" varStatus="status">
+		<c:forEach items="${types}" var="priceType" varStatus="status">
 		<div>
-			<label>${tipoPreco}</label>	
-			<input type="text" name="precos[${status.index}].valor">
-			<input type="hidden" name="precos[${status.index}].tipo">
+			<label>${priceType}</label>	
+			<input type="text" name="prices[${status.index}].value">
+			<input type="hidden" name="prices[${status.index}].type" value="${priceType}">
 		</div>
 		</c:forEach>
 		<button type="submit">Cadastrar</button>

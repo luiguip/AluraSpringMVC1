@@ -5,10 +5,10 @@ import java.math.BigDecimal;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class Preco {
+public class Price {
 
 	private BigDecimal value;
-	private TipoPreco precos;
+	private PriceType type;
 
 	public BigDecimal getValue() {
 		return value;
@@ -16,10 +16,10 @@ public class Preco {
 	public void setValue(BigDecimal value) {
 		this.value = value;
 	}
-	public TipoPreco getPrecos() {
-		return precos;
+	public PriceType getType() {
+		return type;
 	}
-	public void setPrecos(TipoPreco precos) {
-		this.precos = precos;
+	public void setType(PriceType type) {
+		this.type = type;
 	}
 }
