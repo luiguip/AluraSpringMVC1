@@ -15,24 +15,29 @@
 				commandName="product">
 		<div>
 			<label>Titulo</label>
-			<input type="text" name="title">
+			<form:input path="title"/>
 			<form:errors path="title"/>
 		</div>
 		<div>
 			<label>Descrição</label>
-			<textarea rows="10" cols="20" name="description"></textarea>	
+			<form:textarea path="description" rows="10" cols="20"/> 	
 			<form:errors path="description"/>
 		</div>
 		<div>
 			<label>Páginas</label>	
-			<input type="text" name="pages">
+			<form:input path="pages"/>
 			<form:errors path="pages"/>
+		</div>
+		<div>
+			<label>Launch date</label>	
+			<form:input path="lauchDate"/>
+			<form:errors path="lauchDate"/>
 		</div>
 		<c:forEach items="${types}" var="priceType" varStatus="status">
 		<div>
 			<label>${priceType}</label>	
-			<input type="text" name="prices[${status.index}].value">
-			<input type="hidden" name="prices[${status.index}].type" value="${priceType}">
+			<form:input path="prices[${status.index}].value"/>
+			<form:hidden path="prices[${status.index}].type" value="${priceType}"/>
 		</div>
 		</c:forEach>
 		<button type="submit">Cadastrar</button>
