@@ -23,10 +23,12 @@ public class Product {
 	private int pages;
 	
 	@DateTimeFormat
-	private Calendar lauchDate;
+	private Calendar launchDate;
 
 	@ElementCollection
 	private List<Price> prices;
+	
+	private String summaryPath;
 
 	public int getId() {
 		return id;
@@ -57,11 +59,17 @@ public class Product {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	} 
+	public String getSummaryPath() {
+		return summaryPath;
 	}
-	public Calendar getLauchDate() {
-		return lauchDate;
+	public void setSummaryPath(String summaryPath) {
+		this.summaryPath = summaryPath;
 	}
-	public void setLauchDate(Calendar lauchDate) {
-		this.lauchDate = lauchDate;
+	public Calendar getLaunchDate() {
+		return launchDate;
+	}
+	public void setLaunchDate(Calendar launchDate) {
+		this.launchDate = launchDate;
 	}
 }

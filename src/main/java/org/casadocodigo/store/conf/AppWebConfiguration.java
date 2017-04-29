@@ -2,6 +2,7 @@ package org.casadocodigo.store.conf;
 
 import org.casadocodigo.store.controllers.HomeController;
 import org.casadocodigo.store.daos.ProductDAO;
+import org.casadocodigo.store.infra.FileSaver;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,11 +11,15 @@ import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.DateFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @EnableWebMvc
-@ComponentScan(basePackageClasses={HomeController.class, ProductDAO.class})
+@ComponentScan(basePackageClasses={HomeController.class, 
+		ProductDAO.class,
+		FileSaver.class})
 
 public class AppWebConfiguration {
 
@@ -45,5 +50,10 @@ public class AppWebConfiguration {
 		registrar.registerFormatters(conversionService);
 		
 		return conversionService;
+	}
+	
+	@Bean
+	public MultipartResolver multipartResolver() {
+		return new StandardServletMultipartResolver();
 	}
 }

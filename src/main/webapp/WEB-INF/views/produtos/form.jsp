@@ -12,7 +12,8 @@
 <body>
 	<form:form  action="${s:mvcUrl('PC#save').build()}" 
 				method="post"
-				commandName="product">
+				commandName="product"
+				enctype="multipart/form-data">
 		<div>
 			<label>Titulo</label>
 			<form:input path="title"/>
@@ -30,8 +31,8 @@
 		</div>
 		<div>
 			<label>Launch date</label>	
-			<form:input path="lauchDate"/>
-			<form:errors path="lauchDate"/>
+			<form:input path="launchDate"/>
+			<form:errors path="launchDate"/>
 		</div>
 		<c:forEach items="${types}" var="priceType" varStatus="status">
 		<div>
@@ -40,6 +41,10 @@
 			<form:hidden path="prices[${status.index}].type" value="${priceType}"/>
 		</div>
 		</c:forEach>
+		<div>
+			<label>Summary</label>
+			<input type="file" name="summary">
+		</div>
 		<button type="submit">Cadastrar</button>
 	</form:form>
 </body>

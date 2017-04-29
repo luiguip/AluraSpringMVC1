@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.casadocodigo.store.daos.ProductDAO;
+import org.casadocodigo.store.infra.FileSaver;
 import org.casadocodigo.store.models.Product;
 import org.casadocodigo.store.validators.ProductValidation;
 import org.casadocodigo.store.models.PriceType;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -24,6 +26,9 @@ public class ProductController {
 	
 	@Autowired
 	ProductDAO productDAO;
+	
+	@Autowired
+	FileSaver fileSaver;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder) {
@@ -39,13 +44,17 @@ public class ProductController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ModelAndView save(@Valid Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	public ModelAndView save(MultipartFile summary, @Valid Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
 
 		if(bindingResult.hasErrors()){
 			return form(product);
 		}
-		productDAO.save(product);
 		
+		String path = fileSaver.write("summary-archives", summary);
+		product.setSummaryPath(path);
+
+		productDAO.save(product);
 		redirectAttributes.addFlashAttribute("success","product registered with success");
 
 		return new ModelAndView("redirect:produtos");
