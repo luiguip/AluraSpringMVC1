@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,10 +26,15 @@ public class CartController {
 
 	@RequestMapping("/add")
 	public ModelAndView add(Integer productId, PriceType priceType) {
-		ModelAndView modelAndView = new ModelAndView("redirect:/produtos");
+		ModelAndView modelAndView = new ModelAndView("redirect:/cart");
 		CartItem cartItem = createItem(productId,priceType);
 		cart.add(cartItem);
 		return modelAndView;
+	}
+	
+	@RequestMapping(method=RequestMethod.GET)
+	public ModelAndView itens() {
+		return new ModelAndView("/cart/itens");
 	}
 	
 	private CartItem createItem(Integer productId, PriceType priceType) {

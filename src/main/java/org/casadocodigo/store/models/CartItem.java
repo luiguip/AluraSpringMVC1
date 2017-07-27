@@ -1,5 +1,7 @@
 package org.casadocodigo.store.models;
 
+import java.math.BigDecimal;
+
 public class CartItem {
 
 	private Product product;
@@ -21,6 +23,10 @@ public class CartItem {
 	}
 	public void setPriceType(PriceType priceType) {
 		this.priceType = priceType;
+	}
+	
+	public BigDecimal getPrice() {
+		return product.getPriceFor(priceType);
 	}
 	
 	@Override
@@ -48,6 +54,9 @@ public class CartItem {
 		} else if (!product.equals(other.product))
 			return false;
 		return true;
+	}
+	public BigDecimal getTotal(int quantity) {
+		return getPrice().multiply(new BigDecimal(quantity));
 	}
 	
 	

@@ -1,5 +1,6 @@
 package org.casadocodigo.store.models;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 
@@ -71,5 +72,12 @@ public class Product {
 	}
 	public void setLaunchDate(Calendar launchDate) {
 		this.launchDate = launchDate;
+	}
+	public BigDecimal getPriceFor(PriceType priceType) {
+
+		return prices.stream()
+				.filter(price -> price.getType().equals(priceType))
+				.findFirst().get().getValue();
+		
 	}
 }

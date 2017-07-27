@@ -1,5 +1,8 @@
 package org.casadocodigo.store.models;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -9,10 +12,16 @@ import org.springframework.web.context.WebApplicationContext;
 
 @Component
 @Scope(value=WebApplicationContext.SCOPE_SESSION)
-public class Cart {
+public class Cart implements Serializable{
 
+	private static final long serialVersionUID = 8712975602208801952L;
+	
 	private Map<CartItem, Integer> itens = new LinkedHashMap<>();
 	
+	public Collection<CartItem> getItens() {
+		return itens.keySet();
+	}
+
 	public void add(CartItem cartItem) {
 		itens.put(cartItem, getQuantity(cartItem)+1);
 	}
@@ -29,4 +38,15 @@ public class Cart {
 				(next, acumulator)->(next + acumulator));
 	}
 	
+	public BigDecimal getTotal(CartItem cartItem) {
+		return cartItem.getTotal(getQuantity());
+	}
+	
+	public BigDecimal getTotal() {
+		BigDecimal total = BigDecimal.ZERO;
+		for (CartItem cartItem : itens.keySet()) {
+			total = total.add(getTotal(cartItem));
+		}
+		return total;
+	}
 }
