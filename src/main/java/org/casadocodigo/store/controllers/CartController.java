@@ -6,12 +6,15 @@ import org.casadocodigo.store.models.CartItem;
 import org.casadocodigo.store.models.PriceType;
 import org.casadocodigo.store.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/cart")
+@Scope(value=WebApplicationContext.SCOPE_REQUEST)
 public class CartController {
 	
 	@Autowired
