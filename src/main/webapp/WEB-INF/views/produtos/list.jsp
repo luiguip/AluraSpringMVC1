@@ -18,10 +18,10 @@
 			<td>Description</td>
 			<td>Pages</td>	
 		</tr>	
-		<c:forEach items="${products}" var="product" varStatus="status">
+		<c:forEach items="${products}" var="product">
 		<tr>
 			<td>
-				<a href="${s.mvcUrl('PC#info').arg(0,product.id).build() }">${product.title}</a>
+				<a href="${s:mvcUrl('PC#info').arg(0,product.id).build() }">${product.title}</a>
 			</td>	
 			<td>${product.description}</td>	
 			<td>${product.pages}</td>	
