@@ -1,9 +1,14 @@
 package org.casadocodigo.store.models;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class CartItem {
+public class CartItem implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2210666080174195813L;
 	private Product product;
 	private PriceType priceType;
 	

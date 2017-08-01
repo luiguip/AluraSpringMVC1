@@ -11,6 +11,7 @@
 <body>
 	<h1>Products List</h1>
 	<div>${success}</div>
+	<div>${fail }</div>
 	<br>
 	<table>
 		<tr>

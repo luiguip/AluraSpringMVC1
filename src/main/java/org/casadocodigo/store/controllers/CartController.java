@@ -42,5 +42,11 @@ public class CartController {
 		CartItem cartItem = new CartItem(product, priceType);
 		return cartItem;
 	}
-	
+	//TODO nao esta removendo item do cart
+	@RequestMapping("/remove")
+	public ModelAndView remove(Integer productId, PriceType priceType) {
+		cart.remove(productId, priceType);
+		return new ModelAndView("redirect:/cart");
+	}
+
 }
